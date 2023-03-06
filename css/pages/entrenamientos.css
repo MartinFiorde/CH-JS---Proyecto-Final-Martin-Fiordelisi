@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Open+Sans:wght@300;400;700&display=swap");
+.card__btn {
+  display: block;
+  font-family: "Open Sans", sans-serif;
+  margin-right: 30px;
+  border: 3px aliceblue solid;
+  border-radius: 30px;
+  transition-property: border background-color box-shadow;
+  transition-duration: 0.5s;
+  transition-delay: 0s;
+  margin-right: 0;
+}
+
+.card__btn:hover {
+  border: 1px #888888 solid !important;
+  box-shadow: 5px 5px 15px -8px rgba(0, 0, 0, 0.75) !important;
+  background-color: #d5e5eb;
+  transition-property: border background-color box-shadow;
+  transition-duration: 0.5s;
+  transition-delay: 0s;
+}
+
+.flex__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-text, .text-muted {
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.card__ {
+  border-radius: 40px !important;
+}
+.card__text {
+  font-family: "Open Sans", sans-serif;
+}
+.card__img__content {
+  width: 250px;
+  height: 250px;
+}
+
+br {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .card-text, .text-muted {
+    text-align: left;
+  }
+}
+@media (min-width: 992px) {
+  h2,
+  .card-text,
+  .text-muted {
+    text-align: center;
+  }
+}
+@media (min-width: 1200px) {
+  br {
+    display: inherit;
+  }
+  h2,
+  .card-text,
+  .text-muted {
+    text-align: left;
+  }
+  .card__title {
+    height: 6rem;
+    overflow: hidden;
+  }
+}
+@media (min-width: 1400px) {
+  br {
+    display: none;
+  }
+  .card__title {
+    height: auto;
+    overflow: auto;
+  }
+}
+
+/*# sourceMappingURL=entrenamientos.css.map */

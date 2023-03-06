@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Open+Sans:wght@300;400;700&display=swap");
+.card__ {
+  border-radius: 40px !important;
+}
+.card__text {
+  font-family: "Open Sans", sans-serif;
+}
+.card__text strong {
+  display: inline;
+}
+.card__img__content {
+  width: 250px;
+  height: 250px;
+  border-radius: 50% !important;
+}
+
+/*# sourceMappingURL=ficha.css.map */

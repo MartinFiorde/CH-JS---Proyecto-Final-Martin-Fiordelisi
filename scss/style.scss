@@ -1,0 +1,230 @@
+@import "./utilities/_variables";
+@import "./utilities/_mixins";
+
+html {
+    font-size: 20px;
+    font-family: $mainFontFamily;
+    text-align: center;
+}
+
+h1,
+h2 {
+    font-size: 1.5em;
+    font-family: $secondFontFamily;
+}
+
+h3,
+h4 {
+    font-size: 1.2em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    padding: 1rem;
+}
+
+body {
+    background-color: $bgColor;
+    @include flex(column, 0, 0, 0);
+}
+
+.container {
+    margin-top: 30px;
+    font-family: $mainFontFamily;
+    background-color: $containerColor;
+    border-radius: 40px;
+    padding: 20px;
+
+    &.navbar {
+        margin-top: 0;
+        padding: 0;
+    }
+}
+
+.flex {
+    @include flex(0, 0, center, 0);
+    &__column {
+        @include flex(column, 0, 0, 0);
+    }
+}
+
+.navbar {
+    font-family: $secondFontFamily;
+    background-color: $navbarColor;
+    justify-content: space-between;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.nav__logo {
+    margin: 1%;
+    width: 5rem;
+}
+
+.nav-link {
+    display: block;
+    font-family: $secondFontFamily;
+    margin-right: 30px;
+    border: 3px map-get($map: $paletaFonts, $key: fontWhiteColor) solid;
+    color: map-get($map: $paletaFonts, $key: fontWhiteColor);
+    border-radius: 30px;
+    text-align: center;
+    font-weight: bold;
+    background-image: linear-gradient(#a7a7a7, $navbarColor);
+    transition-property: border color background-image;
+    transition-duration: 0.5s;
+    transition-delay: 0s;
+}
+
+.btn {
+    @extend .nav-link;
+    margin-right: 0;
+
+    &__404 {
+        @extend .btn;
+        width: 250px;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 60px;
+    }
+}
+
+.nav-link:hover,
+.btn:hover {
+    color: map-get($map: $paletaFonts, $key: fontBlackColor);
+    border: 3px map-get($map: $paletaFonts, $key: fontBlackColor) solid;
+    background-image: linear-gradient($navbarColor, #666666);
+    transition-property: border color background-image;
+    transition-duration: 0.5s;
+    transition-delay: 0s;
+}
+
+svg {
+    width: 40px;
+    height: 40px;
+}
+
+rect {
+    width: 100px;
+    height: 15px;
+    border-radius: 30px;
+    fill: map-get($map: $paletaFonts, $key: fontWhiteColor);
+    transition: fill 1s;
+}
+
+.banner {
+    @include flex(column, flex-start, flex-start, 0);
+    height: auto;
+
+    &__404 {
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__text {
+        @include flex(column, flex-start, flex-start, 0);
+        height: auto;
+        justify-content: stretch;
+    }
+
+    &__img {
+        width: calc(100% - 40px);
+        align-items: center;
+        margin: 20px;
+        border-radius: 30px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+
+        &__404 {
+            @extend .banner__img;
+            size: 50%;
+            justify-content: center;
+            box-shadow: 0px 0px 20px 10px rgba(46, 46, 46, 0.75);
+        }
+    }
+}
+
+.footer {
+    @include flex(0, center, center, wrap);
+    background-color: $footerColor;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    &__logo {
+        margin: 1%;
+        width: 5rem;
+        margin-right: 90px;
+        margin-left: 90px;
+    }
+
+    &__nav {
+        padding-left: 0;
+        margin-top: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__botones {
+        flex-direction: column;
+        justify-content: space-between;
+        width: 250px;
+        margin-right: 0;
+        p {
+            font-family: $secondFontFamily;
+            color: map-get($map: $paletaFonts, $key: fontWhiteColor);
+            font-size: 0.8rem;
+            margin: auto;
+            padding: 0;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+    }
+}
+
+@media (min-width: 576px) {
+    .footer {
+        justify-content: space-between;
+        flex-wrap: nowrap;
+
+        &__logo {
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+        &__botones {
+            margin-right: 5%;
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    html {
+        text-align: left;
+    }
+
+    .banner {
+        flex-direction: row;
+        height: calc(100% + 40px);
+
+        &__img {
+            width: 40%;
+        }
+
+        &__text {
+            width: 60%;
+
+            &__404 {
+                width: 50%;
+                text-align: center;
+            }
+        }
+    }
+}

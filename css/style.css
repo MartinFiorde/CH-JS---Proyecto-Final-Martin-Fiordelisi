@@ -1,0 +1,223 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Open+Sans:wght@300;400;700&display=swap");
+html {
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+}
+
+h1,
+h2 {
+  font-size: 1.5em;
+  font-family: "Open Sans", sans-serif;
+}
+
+h3,
+h4 {
+  font-size: 1.2em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  padding: 1rem;
+}
+
+body {
+  background-color: #d5e5eb;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  margin-top: 30px;
+  font-family: "Montserrat", sans-serif;
+  background-color: #e4eef2;
+  border-radius: 40px;
+  padding: 20px;
+}
+.container.navbar {
+  margin-top: 0;
+  padding: 0;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+.flex__column {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  font-family: "Open Sans", sans-serif;
+  background-color: #888888;
+  justify-content: space-between;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.nav__logo {
+  margin: 1%;
+  width: 5rem;
+}
+
+.nav-link, .btn, .btn__404 {
+  display: block;
+  font-family: "Open Sans", sans-serif;
+  margin-right: 30px;
+  border: 3px aliceblue solid;
+  color: aliceblue;
+  border-radius: 30px;
+  text-align: center;
+  font-weight: bold;
+  background-image: linear-gradient(#a7a7a7, #888888);
+  transition-property: border color background-image;
+  transition-duration: 0.5s;
+  transition-delay: 0s;
+}
+
+.btn, .btn__404 {
+  margin-right: 0;
+}
+.btn__404 {
+  width: 250px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.nav-link:hover, .btn__404:hover,
+.btn:hover {
+  color: #212529;
+  border: 3px #212529 solid;
+  background-image: linear-gradient(#888888, #666666);
+  transition-property: border color background-image;
+  transition-duration: 0.5s;
+  transition-delay: 0s;
+}
+
+svg {
+  width: 40px;
+  height: 40px;
+}
+
+rect {
+  width: 100px;
+  height: 15px;
+  border-radius: 30px;
+  fill: aliceblue;
+  transition: fill 1s;
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: auto;
+}
+.banner__404 {
+  align-items: center;
+  justify-content: center;
+}
+.banner__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: auto;
+  justify-content: stretch;
+}
+.banner__img, .banner__img__404 {
+  width: calc(100% - 40px);
+  align-items: center;
+  margin: 20px;
+  border-radius: 30px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+.banner__img__404 {
+  size: 50%;
+  justify-content: center;
+  box-shadow: 0px 0px 20px 10px rgba(46, 46, 46, 0.75);
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #333333;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.footer__logo {
+  margin: 1%;
+  width: 5rem;
+  margin-right: 90px;
+  margin-left: 90px;
+}
+.footer__nav {
+  padding-left: 0;
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer__botones {
+  flex-direction: column;
+  justify-content: space-between;
+  width: 250px;
+  margin-right: 0;
+}
+.footer__botones p {
+  font-family: "Open Sans", sans-serif;
+  color: aliceblue;
+  font-size: 0.8rem;
+  margin: auto;
+  padding: 0;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+@media (min-width: 576px) {
+  .footer {
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+  .footer__logo {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .footer__botones {
+    margin-right: 5%;
+  }
+}
+@media (min-width: 992px) {
+  html {
+    text-align: left;
+  }
+  .banner {
+    flex-direction: row;
+    height: calc(100% + 40px);
+  }
+  .banner__img, .banner__img__404 {
+    width: 40%;
+  }
+  .banner__text {
+    width: 60%;
+  }
+  .banner__text__404 {
+    width: 50%;
+    text-align: center;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
