@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MartinFiorde/ch-curso-html-proyecto-final.git"
+    "url": "git+https://github.com/MartinFiorde/CH-JS---Proyecto-Final-Martin-Fiordelisi"
   },
   "keywords": [
     "tercera_entrega",
@@ -22,9 +22,9 @@
   "author": "Martín Fiordelisi",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MartinFiorde/ch-curso-html-proyecto-final/issues"
+    "url": "https://github.com/MartinFiorde/CH-JS---Proyecto-Final-Martin-Fiordelisi"
   },
-  "homepage": "https://github.com/MartinFiorde/ch-curso-html-proyecto-final#readme",
+  "homepage": "https://github.com/MartinFiorde/CH-JS---Proyecto-Final-Martin-Fiordelisi",
   "dependencies": {
     "bootstrap": "^5.2.3",
     "sass": "^1.57.1"

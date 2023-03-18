@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fit Tracker - Contacto</title>
+        <meta name="description" content="Envianos tus comentarios y a la brevedad te responderemos" />
+        <meta name="keywords" content="entrenamiento, ejercicio, bajar peso, tonificar, masa muscular, elongación, salud" />
+        <meta name="author" content="Martín Fiordelisi" />
+        <link rel="shortcut icon" href="../img/favicon.png" />
+        <link rel="stylesheet" href="../css/bootstrap.css" />
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../css/pages/contacto.css" />
+    </head>
+
+    <body>
+        <nav class="container navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand nav__logo" href="./index.html"><img src="../img/logo.png" alt="logo fit tracker" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <svg viewBox="0 0 100 80">
+                        <rect y="05"></rect>
+                        <rect y="35"></rect>
+                        <rect y="65"></rect>
+                    </svg>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-3 mb-lg-0">
+                        <li class="nav-item nav__enlace"><a class="nav-link" href="./ficha.html">Ficha personal</a></li>
+                        <li class="nav-item nav__enlace"><a class="nav-link" href="./entrenamientos.html">Entrenamientos</a></li>
+                        <li class="nav-item nav__enlace"><a class="nav-link" href="./guias.html">Guías</a></li>
+                        <li class="nav-item nav__enlace"><a class="nav-link" href="./contacto.html" rel="nofollow">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <header class=""></header>
+
+        <main class="container container__banner">
+            <section class="flex banner">
+                <div class="banner__text">
+                    <h1>Contacto</h1>
+                    <form class="flex__column" action="envio.php" method="post" id="contacto">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" name="nombre" id="nombre" />
+                        <label for="tel">Teléfono</label>
+                        <input type="tel" id="tel" />
+                        <label for="email">Email</label>
+                        <input type="email" id="email" />
+                        <label for="mensaje">Dejanos tu mensaje</label>
+                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                        <div class="btns">
+                            <input class="btn" type="submit" value="Enviar" />
+                            <input class="btn" type="reset" value="Cancelar" />
+                        </div>
+                    </form>
+                </div>
+                <img class="banner__img" src="../img/karate.jpg" alt="mujer entrenando karate" />
+            </section>
+        </main>
+
+        <footer class="container footer flex">
+            <img class="footer__logo" src="../img/logo.png" alt="logo fit tracker" />
+            <div class="flex footer__botones">
+                <p>Seguinos en nuestras redes</p>
+                <ul class="flex footer__nav">
+                    <li>
+                        <a href="https://www.coderhouse.com/" class="footer__media" target="_blank">
+                            <img src="../img/facebook.png" alt="icono facebook link" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.coderhouse.com/" class="footer__media" target="_blank">
+                            <img src="../img/twitter.png" alt="icono twitter link" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.coderhouse.com/" class="footer__media" target="_blank">
+                            <img src="../img/instagram.png" alt="icono instagram link" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+
+        <script src="../js/bootstrap.bundle.js"></script>
+    </body>
+</html>

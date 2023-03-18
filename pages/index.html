@@ -1,0 +1,140 @@
+<!-- 
+    ALUMNO: Martín Fiordelisi
+    DNI: 35511912
+    MAIL: fiorde_90@hotmail.com
+
+    -------------------------------------------------------
+
+    WIREFRAMES PC:
+    INDEX - https://wireframe.cc/CgGRIh
+    FICHA - https://wireframe.cc/mGdvz9
+    ENTRENAMIENTO - https://wireframe.cc/OQLWvd
+    GUIAS - https://wireframe.cc/SAXL9h
+    CONTACTO - https://wireframe.cc/nkaoUG
+
+    WIREFRAMES MOVILE:
+    INDEX - https://wireframe.cc/zjKBGU
+    FICHA - https://wireframe.cc/MVm3cz
+    ENTRENAMIENTO - https://wireframe.cc/oFyE9e
+    GUIAS - https://wireframe.cc/Jp1ynj
+    CONTACTO - https://wireframe.cc/5ijI80  
+
+    -------------------------------------------------------
+
+    PORTAL DE MODELO BASE: https://www.myfitnesspal.com/es
+    ESTRUCTURA SASS MODELO: https://latteandcode.medium.com/c%C3%B3mo-organizar-los-archivos-sass-de-tu-proyecto-c8b02242d95 
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fit Tracker - Tu app de entrenamiento</title>
+        <meta name="description" content="Aplicación para darle un seguimiento a tus rutinas de entrenamiento, plantearte metas, y controlar el logro de tus objetivos" />
+        <meta name="keywords" content="entrenamiento, ejercicio, bajar peso, tonificar, masa muscular, elongación, salud" />
+        <meta name="author" content="Martín Fiordelisi" />
+        <meta name="robots" content="index,follow" />
+        <link rel="shortcut icon" href="../img/favicon.png" />
+        <link rel="stylesheet" href="../css/bootstrap.css" />
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../css/pages/index.css" />
+    </head>
+
+    <body>
+        <nav class="container navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand nav__logo" href="./index.html"><img src="../img/logo.png" alt="logo fit tracker" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <svg viewBox="0 0 100 80">
+                        <rect y="05"></rect>
+                        <rect y="35"></rect>
+                        <rect y="65"></rect>
+                    </svg>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-3 mb-lg-0">
+                        <li class="nav-item nav__enlace"><a class="nav-link" href="./ficha.html">Ficha personal</a></li>
+                        <li class="nav-item nav__enlace"><a class="nav-link" href="./entrenamientos.html">Entrenamientos</a></li>
+                        <li class="nav-item nav__enlace"><a class="nav-link" href="./guias.html">Guías</a></li>
+                        <li class="nav-item nav__enlace"><a class="nav-link" href="./contacto.html" rel="nofollow">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <header class="container container__banner">
+            <section class="flex banner">
+                <div class="banner__text">
+                    <h1>Una buena salud empieza por un buen entranamiento</h1>
+                    <p>¿Qué debe tener un plan de entrenamiento? El objetivo de un buen programa busca mejorar la condición, la constitución y la naturaleza del cuerpo en cuanto a flexibilidad, fuerza y resistencia. Y desde Fit Tracker te acercamos toda la ayuda lograrlo!</p>
+                </div>
+                <img class="banner__img" src="../img/hombre-estirando.jpg" alt="hombre elongando" />
+            </section>
+        </header>
+
+        <main class="container">
+            <section class="section">
+                <h2>Bienvenido a Fit Tracker! Tu plataforma de entrenamiento</h2>
+                <p>Las app pueden convertirse en unas de las mejores aliadas al momento de hacer ejercicio. Pese a que las mismas no pueden suplantar al ser humano, sí pueden ayudar a llevar un control más estricto en cuanto a rutinas y calorías se refiere.</p>
+            </section>
+
+            <section class="section">
+                <h2>Las herramientas para tus objetivos</h2>
+                <p>¿Quieres perder peso, tonificarte, reducir tu BMI o invertir en tu salud general? Te ofrecemos las funciones que necesitas para conseguirlo.</p>
+                <div class="figure__container flex">
+                    <figure>
+                        <img alt="icono diario" class="figure__img" src="../img/guia.svg" decoding="async" data-nimg="intrinsic" />
+                        <figcaption>
+                            <h3>Aprende. Registra. Mejora.</h3>
+                        </figcaption>
+                        <p>Mantener un diario de comidas te ayudara a comprender tus hábitos y aumenta la probabilidad de que alcances tus objetivos.</p>
+                    </figure>
+
+                    <figure>
+                        <img alt="icono código de barras" class="figure__img" src="../img/registro.svg" decoding="async" data-nimg="intrinsic" />
+                        <figcaption>
+                            <h3>Registro simplificado.</h3>
+                        </figcaption>
+                        <p>Lee los códigos de barras, guarda comidas y recetas, y usa las herramientas rápidas para registrar los alimentos de forma rápida y sencilla.</p>
+                    </figure>
+
+                    <figure>
+                        <img alt="icono zapato" class="figure__img" src="../img/motivacion.svg" decoding="async" data-nimg="intrinsic" />
+                        <figcaption>
+                            <h3>Mantén la motivación.</h3>
+                        </figcaption>
+                        <p>Únete a la mayor comunidad de preparación física del mundo y obtén asesoramiento, consejos y asistencia en todo momento.</p>
+                    </figure>
+                </div>
+            </section>
+        </main>
+
+        <footer class="container footer flex">
+            <img class="footer__logo" src="../img/logo.png" alt="logo fit tracker" />
+            <div class="flex footer__botones">
+                <p class="flex footer__p">Seguinos en nuestras redes</p>
+                <ul class="flex footer__nav">
+                    <li>
+                        <a href="https://www.coderhouse.com/" class="footer__media" target="_blank">
+                            <img src="../img/facebook.png" alt="icono facebook link" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.coderhouse.com/" class="footer__media" target="_blank">
+                            <img src="../img/twitter.png" alt="icono twitter link" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.coderhouse.com/" class="footer__media" target="_blank">
+                            <img src="../img/instagram.png" alt="icono instagram link" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+
+        <script src="../js/bootstrap.bundle.js"></script>
+    </body>
+</html>
