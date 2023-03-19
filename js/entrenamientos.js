@@ -5,6 +5,7 @@ const generarParrafo = (type, title, content) => {
     let main = document.createElement(type);
     let first = document.createElement("strong");
     first.innerHTML = title;
+    main.style.textAlign = "left";
     main.append(first);
     main.append(content);
     main.classList.add("card-text");
@@ -39,7 +40,7 @@ const cargarResumen = () => {
     });
     resumen.append(generarParrafo("p", "Duración total ejercitada: ", `${controlDeValoresNulos(TarjetaEntrenamiento.imprimirDuracion(totalDuracion))} hs`));
     resumen.append(generarParrafo("p", "Total Calorias quemadas: ", `${controlDeValoresNulos(totalCalorias)} kcal`));
-    resumen.append(generarParrafo("p", "Frecuencia cardiaca promedio ponderada: ", `${controlDeValoresNulos(parseInt(totalCardio / totalDuracion, 10))} lpm`));
+    resumen.append(generarParrafo("p", "Frec. cardiaca promedio ponderada: ", `${controlDeValoresNulos(parseInt(totalCardio / totalDuracion, 10))} lpm`));
     resumen.append(generarParrafo("p", "Distancia total recorrida: ", `${controlDeValoresNulos(parseFloat((totalDistancia).toFixed(2)))} km`));
     resumen.append(generarParrafo("p", "Velocidad promedio no ponderada: ", `${controlDeValoresNulos(parseFloat((parseFloat(totalVelocidad) / parseFloat(cantidadVelocidad)).toFixed(2)))} km/h`));
 };
