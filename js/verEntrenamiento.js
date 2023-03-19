@@ -1,70 +1,71 @@
-import { TarjetaEntrenamiento, Ejercicio } from './cargarEntrenamiento.js';
+import { TarjetaEntrenamiento } from "./entidades.js";
+import { cargaInicialLocalStorage, ejerciciosGuardados, tarjetasEntrenamientoGuardadas } from "./util.js";
 
-const parseJsonToTarjetaEntrenamiento = (json) => {
-    let listaEntrenamientosOBJ = [];
-    for (let i = 0; i < json.length; i++) {
-        let aux = Object.assign(new TarjetaEntrenamiento, json[i]);
-        aux.idEjercicio = Object.assign(new Ejercicio, aux.idEjercicio);
-        listaEntrenamientosOBJ.push(aux);
+cargaInicialLocalStorage();
+
+const cargaInfo = () => {
+    const url = new URL(window.location);
+    const idParam = url.searchParams.get("id");
+    console.log("idParam", idParam)
+    const aux = tarjetasEntrenamientoGuardadas().find(x => x.id == idParam);
+    let info = document.querySelector("[data-info]");
+    if (aux.idEjercicio.hasDistancia) {
+        info.innerHTML = `
+            <div class="card__img col-auto">
+                    <img class="card__img__content bd-placeholder-img rounded shadow-sm m-4" src="../img/user_placeholder.png" alt="icono pfp foto de usuario" aria-label="Placeholder: foto de usuario" focusable="false" data-banner/>
+                </div>
+                <figcaption class="card__text col p-2 pe-0 d-flex flex-column position-static">
+                    <h2 class="card__title d-inline-block mb-0" data-tipo>${aux.idEjercicio.nombre}</h2>
+                    <p class="mb-3 text-muted">${aux.mostrarDato("fecha")}</p>
+                    <p class="card-text py-0"><strong>Duración: </strong>${aux.mostrarDato("duracion")} hs</p>
+                    <p class="card-text py-0"><strong>Calorías: </strong>${aux.mostrarDato("calorias")} kcal</p>
+                    <p class="card-text py-0"><strong>Frecuencia cardíaca: </strong>${aux.mostrarDato("frecuenciaCardiacaPromedio")} lpm</p>
+                    <p class="card-text py-0"><strong>Distancia recorrida: </strong>${aux.mostrarDato("distancia")} km</p>
+                    <p class="card-text py-0 pb-3"><strong>Velocidad promedio: </strong>${aux.mostrarDato("velocidadPromedio")} km/h</p>
+                    <div class="btns">
+                        <input class="btn" type="submit" value="Modificar" data-modificar/>
+                        <input class="btn" type="submit" value="Eliminar" data-eliminar/>
+                        <input class="btn" type="reset" value="Volver" data-volver/>
+                    </div>
+                </figcaption>
+            `;
+    } else {
+        info.innerHTML = `
+            <div class="card__img col-auto">
+                    <img class="card__img__content bd-placeholder-img rounded shadow-sm m-4" src="../img/user_placeholder.png" alt="icono pfp foto de usuario" aria-label="Placeholder: foto de usuario" focusable="false" data-banner/>
+                </div>
+                <figcaption class="card__text col p-2 pe-0 d-flex flex-column position-static">
+                <h2 class="card__title d-inline-block mb-0" data-tipo>${aux.idEjercicio.nombre}</h2>
+                    <p class="mb-3 text-muted">${aux.mostrarDato("fecha")}</p>
+                    <p class="card-text py-0"><strong>Duración: </strong>${aux.mostrarDato("duracion")} hs</p>
+                    <p class="card-text py-0"><strong>Calorías: </strong>${aux.mostrarDato("calorias")} kcal</p>
+                    <p class="card-text py-0"><strong>Frecuencia cardíaca: </strong>${aux.mostrarDato("frecuenciaCardiacaPromedio")} lpm</p>
+                    <div class="btns">
+                        <input class="btn" type="submit" value="Modificar" data-modificar/>
+                        <input class="btn" type="submit" value="Eliminar" data-eliminar/>
+                        <input class="btn" type="reset" value="Volver" data-volver/>
+                    </div>
+                </figcaption>
+            `;
     }
-    return listaEntrenamientosOBJ;
-}
-
-const cargarLocalSotage = () => {
-    if (localStorage.getItem("listaTarjetas") == null) {
-        let listaEjercicios = [
-            new Ejercicio(0, "Ciclismo", true, "ciclismo.jpg"),
-            new Ejercicio(1, "Artes marciales", false, "karate.jpg"),
-            new Ejercicio(2, "Elongación", false, "elongar.jpg"),
-            new Ejercicio(3, "Running", true, "correr.jpg"),
-
-        ];
-
-        let listaTarjetasEntrenamiento = [
-            new TarjetaEntrenamiento(3, listaEjercicios[0], "Dic 30", (0 * 3600000 + 39 * 60000 + 20 * 1000), 272, 9.55, 187),
-            new TarjetaEntrenamiento(2, listaEjercicios[1], "Dic 23", (1 * 3600000 + 30 * 60000 + 0 * 1000), 414, null, 127),
-            new TarjetaEntrenamiento(1, listaEjercicios[2], "Dic 15", (1 * 3600000 + 10 * 60000 + 30 * 1000), 398, null, 112),
-            new TarjetaEntrenamiento(0, listaEjercicios[3], "Nov 28", (2 * 3600000 + 0 * 60000 + 0 * 1000), 398, 6.81, 115),
-        ];
-        localStorage.setItem("listaTarjetas", JSON.stringify(listaTarjetasEntrenamiento));
-
-    }
-    let listaEntrenamientosOBJ = parseJsonToTarjetaEntrenamiento(JSON.parse(localStorage.getItem("listaTarjetas")));
-
-}
-
-const imprimirResumen = () => {
-    let totalDuracion = 0;
-    let totalCalorias = 0;
-    let totalDistancia = 0;
-    let totalVelocidad = 0;
-    let cantidadVelocidad = 0;
-    let totalCardio = 0;
-
-    listaTarjetasEntrenamiento.forEach(aux => {
-        totalDuracion += aux.duracion;
-        totalCalorias += aux.calorias;
-        aux.distancia != null ? totalDistancia += aux.distancia : null;
-        aux.velocidadPromedio != null ? totalVelocidad += parseFloat(aux.velocidadPromedio) : null;
-        aux.velocidadPromedio != null ? cantidadVelocidad++ : null;
-        totalCardio += aux.frecuenciaCardiacaPromedio * aux.duracion;
-    });
-
-    let mensaje = "Resumen de toda su actividad:\n";
-    mensaje = mensaje.concat("Duración total ejercitada: " + imprimirDuracion(totalDuracion) + "\n");
-    mensaje = mensaje.concat("Total Calorias quemadas: " + totalCalorias + "\n");
-    mensaje = mensaje.concat("Distancia total recorrida: " + parseFloat((totalDistancia).toFixed(2)) + "\n");
-    mensaje = mensaje.concat("Velocidad promedio no ponderada: " + parseFloat((parseFloat(totalVelocidad) / parseFloat(cantidadVelocidad)).toFixed(2)) + "\n");
-    mensaje = mensaje.concat("Frecuencia cardiaca promedio ponderada: " + parseInt(totalCardio / totalDuracion, 10) + "\n");
-    mensaje = mensaje.concat("- - - - - -");
-
-    console.log(mensaje);
+    document.querySelector("[data-banner]").src = `../img/entrenamientos/${aux.idEjercicio.urlImagen}`;
+    document.querySelector("[data-modificar]").addEventListener("click", () => window.location.href = `../pages/cargar-entrenamiento.html?id=${idParam}`);
+    document.querySelector("[data-eliminar]").addEventListener("click", function () { eliminar(idParam) });
+    document.querySelector("[data-volver]").addEventListener("click", () => window.location.href = '../pages/entrenamientos.html');
 };
 
+const eliminar = (id) => {
+    console.log("idParam", parseInt(id), typeof parseInt(id));
+    let listaTarjetas = tarjetasEntrenamientoGuardadas();
+    let i = listaTarjetas.findIndex((x) => x.id == id);
+    console.log("i",i)
+    listaTarjetas.splice(i, 1);
+    localStorage.setItem("listaTarjetas", JSON.stringify(listaTarjetas));
+    window.location.href = '../pages/entrenamientos.html';
+}
 
-
-const cargarTablero = () => {
-    let listaEntrenamientosOBJ = parseJsonToTarjetaEntrenamiento(JSON.parse(localStorage.getItem("listaTarjetas")));
+const cargarDatos = () => {
+    let listaEntrenamientosOBJ = tarjetasEntrenamientoGuardadas();
     const tablero = document.querySelector("[data-entrenamientos]");
 
     for (let i = 0; i < listaEntrenamientosOBJ.length; i++) {
@@ -72,7 +73,7 @@ const cargarTablero = () => {
         let div = document.createElement("article");
         div.classList.add("col-md-6");
 
-        if (aux.idEjercicio.hasDistancia) {
+        if (aux.idEjercicio.hasDistancia) { // FALTA CAMBIAR LINK EN LINEA 62 Y 78 PARA VER-ENTRENAMIENTO, Y QUE ESA PESTAÑA LLEVE A CAMBIAR-ENTRENAMIENTO
             div.innerHTML = `
             <figure class="card__btn card__ flex__card row mb-4 g-0 border rounded overflow-hidden flex-md-row shadow-sm h-md-250 position-relative">
                 <figcaption class="card__text col p-2 pe-0 d-flex flex-column position-static">
@@ -81,7 +82,7 @@ const cargarTablero = () => {
                     <p class="card-text"><strong>Duración: </strong><br />${aux.mostrarDato("duracion")} hs</p>
                     <p class="card-text"><strong>Calorias: </strong><br />${aux.mostrarDato("calorias")} kcal</p>
                     <p class="card-text"><strong>Vel. Prom.: </strong><br />${aux.mostrarDato("velocidadPromedio")} km/h</p>
-                    <!-- <a href="../404.html" class="card__ stretched-link"></a> -->
+                    <a href="./cargar-entrenamiento.html?id=${aux.mostrarDato("id")}" class="card__ stretched-link"></a> 
                 </figcaption>
                 <div class="card__img col-auto d-none d-lg-block">
                     <img class="card__img__content bd-placeholder-img rounded shadow-sm m-4" src="../img/entrenamientos/${aux.idEjercicio.urlImagen}" alt="icono ciclismo" aria-label="Placeholder: icono ciclismo" focusable="false" />
@@ -97,7 +98,7 @@ const cargarTablero = () => {
                     <p class="card-text"><strong>Duración: </strong><br />${aux.mostrarDato("duracion")} hs</p>
                     <p class="card-text"><strong>Calorias: </strong><br />${aux.mostrarDato("calorias")} kcal</p>
                     <p class="card-text"><strong>Frec. Card. Prom.: </strong><br />${aux.mostrarDato("frecuenciaCardiacaPromedio")} lpm</p>
-                    <!-- <a href="../404.html" class="card__ stretched-link"></a> -->
+                    <a href="./cargar-entrenamiento.html?id=${aux.mostrarDato("id")}" class="card__ stretched-link"></a> 
                 </figcaption>
                 <div class="card__img col-auto d-none d-lg-block">
                     <img class="card__img__content bd-placeholder-img rounded shadow-sm m-4" src="../img/entrenamientos/${aux.idEjercicio.urlImagen}" alt="icono ciclismo" aria-label="Placeholder: icono ciclismo" focusable="false" />
@@ -110,4 +111,4 @@ const cargarTablero = () => {
     }
 }
 
-cargarTablero();
+cargaInfo();

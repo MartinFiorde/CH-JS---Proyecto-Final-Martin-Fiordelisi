@@ -40,10 +40,10 @@ const precargaDatosAModificar = async () => {
     document.querySelector("[data-fecha]").addEventListener('change', function (e) { controlarError(e, "fecha") });
     document.querySelector("[data-duracion]").addEventListener('change', function (e) { controlarError(e, "duracion") });
     // document.querySelector("[data-duracion]").addEventListener('input', function (e) { autocompletarDosPuntos(e) });
-    document.querySelector("[data-duracion]").addEventListener('input', autocompletarDosPuntosA); 
-    document.querySelector("[data-duracion]").oninput = autocompletarDosPuntosB; 
-    
-    
+    document.querySelector("[data-duracion]").addEventListener('input', autocompletarDosPuntosA);
+    document.querySelector("[data-duracion]").addEventListener('input', autocompletarDosPuntosB);
+
+
     if (tarjeta != null) {
         document.querySelector("[data-id]").value = tarjeta.mostrarDato("id");
         document.querySelector("[data-tipo]").value = tarjeta.idEjercicio.id;
@@ -71,8 +71,8 @@ const autocompletarDosPuntosB = (e) => {
 }
 
 const controlarError = (e, codigo) => {
-    document.querySelector("[data-duracion]").addEventListener('input', autocompletarDosPuntosA); 
-    document.querySelector("[data-duracion]").addEventListener('input', autocompletarDosPuntosB); 
+    document.querySelector("[data-duracion]").addEventListener('input', autocompletarDosPuntosA);
+    document.querySelector("[data-duracion]").addEventListener('input', autocompletarDosPuntosB);
     if (codigo == "duracion") {
 
         // Elimina todos los caracteres no numéricos del valor de entrada
@@ -116,6 +116,16 @@ const escribirError = (codigo) => {
 }
 
 const mainFormulario = () => {
+    document.querySelector("[data-cancelar]").onclick = (e) => {
+        e.preventDefault();
+        const url = new URL(window.location);
+        const idParam = url.searchParams.get("id");
+        if (idParam) {
+            window.location.href = `../pages/ver-entrenamiento.html?id=${idParam}`;
+        } else {
+            window.location.href = '../pages/entrenamientos.html?asd=1';
+        }
+    }
     document.querySelector("[data-form]").addEventListener("submit", (e) => {
         e.preventDefault();
         let id = document.querySelector("[data-id]").value;
@@ -126,69 +136,23 @@ const mainFormulario = () => {
         let cardio = parseInt(document.querySelector("[data-cardio]").value, 10);
         let distancia = parseFloat(parseFloat(document.querySelector("[data-distancia]").value).toFixed(2));
 
-        if (!id) {
-            const nuevaTarjeta = new TarjetaEntrenamiento(tarjetasEntrenamientoGuardadas().length, tipo, fecha, duracion, calorias, cardio, distancia);
-            let listaTarjetasEntrenamiento = tarjetasEntrenamientoGuardadas();
-            listaTarjetasEntrenamiento.unshift(nuevaTarjeta);
-            localStorage.setItem("listaTarjetas", JSON.stringify(listaTarjetasEntrenamiento));
-        } else {
+        if (id) {
             const nuevaTarjeta = new TarjetaEntrenamiento(id, tipo, fecha, duracion, calorias, cardio, distancia);
             let listaTarjetasEntrenamiento = tarjetasEntrenamientoGuardadas();
             const i = listaTarjetasEntrenamiento.findIndex(x => x.id == id);
             listaTarjetasEntrenamiento[i] = nuevaTarjeta;
-            console.log(i)
-            console.log(listaTarjetasEntrenamiento[i])
             localStorage.setItem("listaTarjetas", JSON.stringify(listaTarjetasEntrenamiento));
-            //FALTA LOGICA PARA MODIFICAR ENTRADA EXISTENTE
+            window.location.href = `../pages/ver-entrenamiento.html?id=${id}`;
+        } else {
+            const nuevaTarjeta = new TarjetaEntrenamiento(tarjetasEntrenamientoGuardadas()[0].id + 1, tipo, fecha, duracion, calorias, cardio, distancia);
+            let listaTarjetasEntrenamiento = tarjetasEntrenamientoGuardadas();
+            listaTarjetasEntrenamiento.unshift(nuevaTarjeta);
+            localStorage.setItem("listaTarjetas", JSON.stringify(listaTarjetasEntrenamiento));
+            window.location.href = `../pages/entrenamientos.html`;
         }
-        window.location.href = "/pages/entrenamientos.html"
-
     });
 }
 
 precargaSelect();
 precargaDatosAModificar();
 mainFormulario();
-
-
-/*
-const cargarFecha = () => {
-    if (typeof option.substring(0, 3) == "string" && !Number.isNaN(parseInt(option.substring(4, 6), 10))) {
-        return option; // PENDIENTE AGREGAR LOGICA PARA REPROCESAR STRING A FORMATO DATE
-    }
-}
-const cargarDuracion = () => {
-    if (!Number.isNaN(parseInt(option.substring(0, 2), 10)) && !Number.isNaN(parseInt(option.substring(3, 5), 10)) && !Number.isNaN(parseInt(option.substring(6, 8), 10))) {
-        return option.substring(0, 2) * 3600000 + option.substring(3, 5) * 60000 + option.substring(6, 8) * 1000;
-    }
-}
-const cargarCalorias = () => {
-    if (!Number.isNaN(parseInt(option, 10))) {
-        return parseInt(option, 10);
-    }
-}
-const cargarDistancia = (EjercicioHasDistancia) => {
-    if (!EjercicioHasDistancia) {
-        return null;
-    } else {
-        if (!Number.isNaN(parseFloat(option))) {
-            return parseFloat(parseFloat(option).toFixed(2));
-        }
-    }
-}
-const cargarCardio = () => {
-    if (!Number.isNaN(parseInt(option, 10))) {
-        return parseInt(option, 10);
-    }
-}
-function main() {
-    option = window.prompt("Bievenido a su registro de entrenamientos! Le gustaría ingresar un nuevo entrenamiento? (s / n)");
-    if (CONFIRMAR(option)) {
-        let ejercicio = parseJsonToTarjetaEntrenamiento(JSON.parse(localStorage.getItem("listaTarjetas")));
-        const nuevaTarjeta = new TarjetaEntrenamiento(listaTarjetasEntrenamiento.length, ejercicio, cargarFecha(), cargarDuracion(), cargarCalorias(), cargarDistancia(ejercicio.hasDistancia), cargarCardio());
-        listaTarjetasEntrenamiento.unshift(nuevaTarjeta);
-        let listaEntrenamientosOBJ = parseJsonToTarjetaEntrenamiento(JSON.parse(localStorage.getItem("listaTarjetas")));
-    }
-}
-*/
-

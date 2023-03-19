@@ -1,8 +1,23 @@
 import { TarjetaEntrenamiento } from "./entidades.js";
 import { cargaInicialLocalStorage, tarjetasEntrenamientoGuardadas } from "./util.js";
 
-cargaInicialLocalStorage();
 
+const generarParrafo = (type, title, content) => {
+    let main = document.createElement(type);
+    let first = document.createElement("strong");
+    first.innerHTML = title;
+    main.append(first);
+    main.append(content);
+    main.classList.add("card-text");
+    return main;
+}
+const escribir = (dato) => {
+if (!dato || dato=="00:00:00") {
+    return "--";
+} else {
+    return dato;
+}
+}
 const cargarResumen = () => {
     let totalDuracion = 0;
     let totalCalorias = 0;
@@ -22,24 +37,14 @@ const cargarResumen = () => {
         totalCardio += aux.frecuenciaCardiacaPromedio * aux.duracion;
     });
 
-    resumen.append(generarParrafo("p", "Duración total ejercitada: ", `${TarjetaEntrenamiento.imprimirDuracion(totalDuracion)} hs`));
-    resumen.append(generarParrafo("p", "Total Calorias quemadas: ", `${totalCalorias} kcal`));
-    resumen.append(generarParrafo("p", "Distancia total recorrida: ", `${parseFloat((totalDistancia).toFixed(2))} km`));
-    resumen.append(generarParrafo("p", "Velocidad promedio no ponderada: ", parseFloat((parseFloat(totalVelocidad) / parseFloat(cantidadVelocidad)).toFixed(2))));
-    resumen.append(generarParrafo("p", "Frecuencia cardiaca promedio ponderada: ", parseInt(totalCardio / totalDuracion, 10)));
+    resumen.append(generarParrafo("p", "Duración total ejercitada: ", `${escribir(TarjetaEntrenamiento.imprimirDuracion(totalDuracion))} hs`));
+    resumen.append(generarParrafo("p", "Total Calorias quemadas: ", `${escribir(totalCalorias)} kcal`));
+    resumen.append(generarParrafo("p", "Frecuencia cardiaca promedio ponderada: ", `${escribir(parseInt(totalCardio / totalDuracion, 10))} lpm`));
+    resumen.append(generarParrafo("p", "Distancia total recorrida: ", `${escribir(parseFloat((totalDistancia).toFixed(2)))} km`));
+    resumen.append(generarParrafo("p", "Velocidad promedio no ponderada: ", `${escribir(parseFloat((parseFloat(totalVelocidad) / parseFloat(cantidadVelocidad)).toFixed(2)))} km/h`));
+    
 
 };
-
-const generarParrafo = (type, title, content) => {
-    let main = document.createElement(type);
-    let first = document.createElement("strong");
-    first.innerHTML = title;
-    main.append(first);
-    main.append(content);
-    main.classList.add("card-text");
-
-    return main;
-}
 
 const cargarTablero = () => {
     let listaEntrenamientosOBJ = tarjetasEntrenamientoGuardadas();
@@ -59,7 +64,7 @@ const cargarTablero = () => {
                     <p class="card-text"><strong>Duración: </strong><br />${aux.mostrarDato("duracion")} hs</p>
                     <p class="card-text"><strong>Calorias: </strong><br />${aux.mostrarDato("calorias")} kcal</p>
                     <p class="card-text"><strong>Vel. Prom.: </strong><br />${aux.mostrarDato("velocidadPromedio")} km/h</p>
-                    <a href="./cargar-entrenamiento.html?id=${aux.mostrarDato("id")}" class="card__ stretched-link"></a> 
+                    <a href="./ver-entrenamiento.html?id=${aux.mostrarDato("id")}" class="card__ stretched-link"></a> 
                 </figcaption>
                 <div class="card__img col-auto d-none d-lg-block">
                     <img class="card__img__content bd-placeholder-img rounded shadow-sm m-4" src="../img/entrenamientos/${aux.idEjercicio.urlImagen}" alt="icono ciclismo" aria-label="Placeholder: icono ciclismo" focusable="false" />
@@ -75,7 +80,7 @@ const cargarTablero = () => {
                     <p class="card-text"><strong>Duración: </strong><br />${aux.mostrarDato("duracion")} hs</p>
                     <p class="card-text"><strong>Calorias: </strong><br />${aux.mostrarDato("calorias")} kcal</p>
                     <p class="card-text"><strong>Frec. Card. Prom.: </strong><br />${aux.mostrarDato("frecuenciaCardiacaPromedio")} lpm</p>
-                    <a href="./cargar-entrenamiento.html?id=${aux.mostrarDato("id")}" class="card__ stretched-link"></a> 
+                    <a href="./ver-entrenamiento.html?id=${aux.mostrarDato("id")}" class="card__ stretched-link"></a> 
                 </figcaption>
                 <div class="card__img col-auto d-none d-lg-block">
                     <img class="card__img__content bd-placeholder-img rounded shadow-sm m-4" src="../img/entrenamientos/${aux.idEjercicio.urlImagen}" alt="icono ciclismo" aria-label="Placeholder: icono ciclismo" focusable="false" />
@@ -88,5 +93,6 @@ const cargarTablero = () => {
     }
 }
 
+cargaInicialLocalStorage();
 cargarTablero();
 cargarResumen();
