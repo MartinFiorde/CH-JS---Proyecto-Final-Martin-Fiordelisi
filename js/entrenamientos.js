@@ -1,7 +1,6 @@
 import { TarjetaEntrenamiento } from "./entidades.js";
 import { cargaInicialLocalStorage, tarjetasEntrenamientoGuardadas } from "./util.js";
 
-
 const generarParrafo = (type, title, content) => {
     let main = document.createElement(type);
     let first = document.createElement("strong");
@@ -11,13 +10,15 @@ const generarParrafo = (type, title, content) => {
     main.classList.add("card-text");
     return main;
 }
-const escribir = (dato) => {
-if (!dato || dato=="00:00:00") {
-    return "--";
-} else {
-    return dato;
+
+const controlDeValoresNulos = (dato) => {
+    if (!dato || dato == "00:00:00") {
+        return "--";
+    } else {
+        return dato;
+    }
 }
-}
+
 const cargarResumen = () => {
     let totalDuracion = 0;
     let totalCalorias = 0;
@@ -36,20 +37,16 @@ const cargarResumen = () => {
         aux.velocidadPromedio != null && cantidadVelocidad++;
         totalCardio += aux.frecuenciaCardiacaPromedio * aux.duracion;
     });
-
-    resumen.append(generarParrafo("p", "Duración total ejercitada: ", `${escribir(TarjetaEntrenamiento.imprimirDuracion(totalDuracion))} hs`));
-    resumen.append(generarParrafo("p", "Total Calorias quemadas: ", `${escribir(totalCalorias)} kcal`));
-    resumen.append(generarParrafo("p", "Frecuencia cardiaca promedio ponderada: ", `${escribir(parseInt(totalCardio / totalDuracion, 10))} lpm`));
-    resumen.append(generarParrafo("p", "Distancia total recorrida: ", `${escribir(parseFloat((totalDistancia).toFixed(2)))} km`));
-    resumen.append(generarParrafo("p", "Velocidad promedio no ponderada: ", `${escribir(parseFloat((parseFloat(totalVelocidad) / parseFloat(cantidadVelocidad)).toFixed(2)))} km/h`));
-    
-
+    resumen.append(generarParrafo("p", "Duración total ejercitada: ", `${controlDeValoresNulos(TarjetaEntrenamiento.imprimirDuracion(totalDuracion))} hs`));
+    resumen.append(generarParrafo("p", "Total Calorias quemadas: ", `${controlDeValoresNulos(totalCalorias)} kcal`));
+    resumen.append(generarParrafo("p", "Frecuencia cardiaca promedio ponderada: ", `${controlDeValoresNulos(parseInt(totalCardio / totalDuracion, 10))} lpm`));
+    resumen.append(generarParrafo("p", "Distancia total recorrida: ", `${controlDeValoresNulos(parseFloat((totalDistancia).toFixed(2)))} km`));
+    resumen.append(generarParrafo("p", "Velocidad promedio no ponderada: ", `${controlDeValoresNulos(parseFloat((parseFloat(totalVelocidad) / parseFloat(cantidadVelocidad)).toFixed(2)))} km/h`));
 };
 
 const cargarTablero = () => {
     let listaEntrenamientosOBJ = tarjetasEntrenamientoGuardadas();
     const tablero = document.querySelector("[data-entrenamientos]");
-
     for (let i = 0; i < listaEntrenamientosOBJ.length; i++) {
         let aux = listaEntrenamientosOBJ[i];
         let div = document.createElement("article");
