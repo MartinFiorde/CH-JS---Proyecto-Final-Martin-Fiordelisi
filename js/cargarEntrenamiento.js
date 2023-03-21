@@ -1,7 +1,10 @@
 import { TarjetaEntrenamiento } from "./entidades.js";
 import { cargaInicialLocalStorage, ejerciciosGuardados, tarjetasEntrenamientoGuardadas } from "./util.js";
+import { DateTime } from "./librerias/luxon.js"; // LIBRERIA LUXON - https://moment.github.io/luxon/
+const generarId = uuid.v4(); // LIBRERIA UUID - https://cdnjs.com/libraries/uuid/8.3.2
 
 const precargaBanner = () => {
+    console.log("uuidv4",generarId);
     let banner = document.querySelector("[data-banner]");
     let select = document.querySelector("[data-tipo]");
     if (select.value != "") {
@@ -37,57 +40,48 @@ const precargaDatosAModificar = async () => {
     if (tarjeta != null) {
         document.querySelector("[data-id]").value = tarjeta.mostrarDato("id");
         document.querySelector("[data-tipo]").value = tarjeta.idEjercicio.id;
-        document.querySelector("[data-fecha]").value = tarjeta.mostrarDato("fecha");
+        document.querySelector("[data-fecha]").value = tarjeta.fecha;
         document.querySelector("[data-duracion]").value = tarjeta.mostrarDato("duracion");
         document.querySelector("[data-calorias]").value = tarjeta.mostrarDato("calorias");
         document.querySelector("[data-cardio]").value = tarjeta.mostrarDato("frecuenciaCardiacaPromedio");
         document.querySelector("[data-distancia]").value = tarjeta.mostrarDato("distancia");
         precargaBanner();
     }
-    document.querySelector("[data-fecha]").addEventListener('change', (e) => controlarError(e, "fecha", `Debe ingresar una fecha con el formato del ejemplo`));
-    document.querySelector("[data-duracion]").addEventListener('change', (e) => controlarError(e, "duracion", `Debe ingresar la información completa`));
-    document.querySelector("[data-distancia]").addEventListener('input', (e) => controlarError(e, "distancia", `Debe ingresar un valor numérico`));
+    // document.querySelector("[data-fecha]").addEventListener('change', (event) => controlarError(event, "fecha", `Debe ingresar una fecha con el formato del ejemplo`));
+    document.querySelector("[data-duracion]").addEventListener('change', (event) => controlarError(event, "duracion", `Debe ingresar la información completa`));
+    document.querySelector("[data-distancia]").addEventListener('input', (event) => controlarError(event, "distancia", `Debe ingresar un valor numérico`));
     document.querySelector("[data-duracion]").onkeydown = autocompletarDosPuntos;
 }
 
-const autocompletarDosPuntos = (e) => {
-    if (e.code.includes("Digit") && (e.target.value.length == 1 || e.target.value.length == 4)) {
-        e.preventDefault();
-        e.target.value += `${e.key.substring(0, 1)}:`;
+const autocompletarDosPuntos = (event) => {
+    if (event.code.includes("Digit") && (event.target.value.length == 1 || event.target.value.length == 4)) {
+        event.preventDefault();
+        event.target.value += `${event.key.substring(0, 1)}:`;
     }
-    if ((e.keyCode == 8) && (e.target.value.length == 3 || e.target.value.length == 6)) {
-        e.preventDefault();
-        e.target.value = e.target.value.substring(0, e.target.value.length - 2);
+    if ((event.keyCode == 8) && (event.target.value.length == 3 || event.target.value.length == 6)) {
+        event.preventDefault();
+        event.target.value = event.target.value.substring(0, event.target.value.length - 2);
     }
-    if (e.code.includes("Key")) {
+    if (event.code.includes("Key")) {
         !document.querySelector(`[data-error-${"duracion"}]`) && escribirError("duracion", `Solo se permite ingresar carácteres numéricos`);
-        e.preventDefault();
+        event.preventDefault();
     } else {
         document.querySelector(`[data-error-${"duracion"}]`)?.remove();
     };
 }
 
-const controlarError = (e, codigo, texto) => {
+const controlarError = (event, codigo, texto) => {
     if (codigo == "duracion") {
         // if ((!Number.isNaN(parseInt(e.target.value.substring(0, 2), 10)) && !Number.isNaN(parseInt(e.target.value.substring(3, 5), 10)) && !Number.isNaN(parseInt(e.target.value.substring(6, 8), 10))) ||
-        if ((/^([0-1]?\d).([0-5]?\d).([0-5]?\d)$/i.test(e.target.value) && e.target.value.length == 8) || // https://stackoverflow.com/questions/8318236/regex-pattern-for-hhmmss-time-string
-            e.target.value == "") {
+        if ((/^([0-1]?\d).([0-5]?\d).([0-5]?\d)$/i.test(event.target.value) && event.target.value.length == 8) || // https://stackoverflow.com/questions/8318236/regex-pattern-for-hhmmss-time-string
+            event.target.value == "") {
             document.querySelector(`[data-error-${codigo}]`)?.remove();
         } else {
             !document.querySelector(`[data-error-${codigo}]`) && escribirError(codigo, texto);
         };
     }
-    if (codigo == "fecha") {
-        if (e.target.value.length == 6 || e.target.value == "") {
-            document.querySelector(`[data-error-${codigo}]`)?.remove();
-        } else {
-            if (!document.querySelector(`[data-error-${codigo}]`)) {
-                escribirError(codigo, texto);
-            }
-        };
-    }
     if (codigo == "distancia") {
-        if (!isNaN(parseFloat(e.target.value)) || e.target.value == "") {
+        if (!isNaN(parseFloat(event.target.value)) || event.target.value == "") {
             document.querySelector(`[data-error-${codigo}]`)?.remove();
         } else {
             !document.querySelector(`[data-error-${codigo}]`) && escribirError(codigo, texto);
@@ -105,8 +99,8 @@ const escribirError = (codigo, texto) => {
     document.querySelector(`[data-${codigo}]`).parentNode.insertBefore(p, document.querySelector(`[data-${codigo}]`).nextSibling);
 }
 
-const enviarFormulario = (e) => {
-    e.preventDefault();
+const enviarFormulario = (event) => {
+    event.preventDefault();
     let id = document.querySelector("[data-id]").value;
     let tipo = ejerciciosGuardados().find(x => x.id == document.querySelector("[data-tipo]").value);
     let fecha = document.querySelector("[data-fecha]").value; // PENDIENTE AGREGAR LOGICA PARA REPROCESAR STRING A FORMATO DATE
@@ -122,7 +116,7 @@ const enviarFormulario = (e) => {
         localStorage.setItem("listaTarjetas", JSON.stringify(listaTarjetasEntrenamiento));
         window.location.href = `../pages/ver-entrenamiento.html?id=${id}`;
     } else {
-        const nuevaTarjeta = new TarjetaEntrenamiento(tarjetasEntrenamientoGuardadas()[0].id + 1, tipo, fecha, duracion, calorias, cardio, distancia);
+        const nuevaTarjeta = new TarjetaEntrenamiento(generarId, tipo, fecha, duracion, calorias, cardio, distancia);
         let listaTarjetasEntrenamiento = tarjetasEntrenamientoGuardadas();
         listaTarjetasEntrenamiento.unshift(nuevaTarjeta);
         localStorage.setItem("listaTarjetas", JSON.stringify(listaTarjetasEntrenamiento));
@@ -130,8 +124,8 @@ const enviarFormulario = (e) => {
     }
 }
 
-const botonCancelar = (e) => {
-        e.preventDefault();
+const botonCancelar = (event) => {
+        event.preventDefault();
         const url = new URL(window.location);
         const idParam = url.searchParams.get("id");
         if (idParam) {

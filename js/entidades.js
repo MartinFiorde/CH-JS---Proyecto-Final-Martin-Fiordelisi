@@ -20,12 +20,13 @@ export class TarjetaEntrenamiento {
     }
 
     mostrarDato(key) {
-        if (key == "duracion") {
-            return TarjetaEntrenamiento.imprimirDuracion(this.duracion);
-        } else if (key == "fecha") {
-            return this[key]; // PENDIENTE AGREGAR LOGICA DE DATE AL ATRIBUTO, Y LOGICA DE VISUALIZACIÓN A LA CONSULTA
-        } else {
-            return this[key];
+        switch (key) {
+            case "duracion":
+                return TarjetaEntrenamiento.imprimirDuracion(this.duracion);
+            case "fecha":
+                return TarjetaEntrenamiento.imprimirFechaCorta(this.fecha);
+            default:
+                return this[key];
         }
     }
 
@@ -46,5 +47,11 @@ export class TarjetaEntrenamiento {
             segundo = "0".concat(segundo);
         }
         return `${hora}:${minuto}:${segundo}`;
+    }
+
+    static imprimirFechaCorta(fecha) {
+        var meses = [undefined, 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+        console.log(meses[parseInt(fecha.substring(5, 7))])
+        return `${meses[parseInt(fecha.substring(5, 7))]} ${fecha.substring(fecha.length-2)}`
     }
 }
