@@ -42,25 +42,12 @@
             <section class="flex banner">
                 <div class="banner__text">
                     <h1>Datos del entrenamiento</h1>
-                    <!-- <form action="#" class="flex flex--column" data-form>
-                        <div class="input-container">
-                            <input name="nombre" id="nombre" class="input" type="text" placeholder="nombre" required data-nombre />
-                            <label class="input-label" for="nombre">Nombre</label>
-                            <span class="input-menssage-error">Este campo es requerido</span>
-                        </div>
-                        <div class="input-container">
-                            <input name="email" id="email" class="input" type="text" placeholder="email" required data-email />
-                            <label class="input-label" for="email">Email</label>
-                            <span class="input-menssage-error">Este campo es requerido</span>
-                        </div>
-                        <button type="submit" class="button">Editar cliente</button>
-                    </form> -->
                     <form class="flex__column" action="envio.php" method="post" id="contacto" data-form>
                         <input type="hidden" name="id" id="id" data-id/>
                         <label for="tipo">Tipo de ejercicio</label>
                         <select name="tipo" id="tipo" required data-tipo ></select>
                         <label for="fecha">Fecha</label>
-                        <input type="text" name="fecha" placeholder="ej:  Ene 07 - Feb 28 - Sep 01" id="fecha" maxlength="6" required data-fecha/>
+                        <input type="date" name="fecha" id="fecha" required data-fecha/>
                         <label for="duracion">Duracion</label>
                         <input type="text" id="duracion" placeholder="ej:  02:00:00 - 00:54:30" maxlength="8" required data-duracion/>
                         <label for="calorias">Calorias</label>
@@ -70,7 +57,6 @@
                         <label style="display: none" for="distancia" data-distancia-2>Distancia</label>
                         <input style="display: none" type="text" placeholder="ej:  3.12 - 9.6 - 2 - 13.25" id="distancia" data-distancia/>
                         <br>
-                        
                         <div class="btns">
                             <input class="btn mt-3" type="submit" value="Cargar" />
                             <input class="btn mt-3" type="reset" value="Cancelar" data-cancelar/>
@@ -105,7 +91,8 @@
             </div>
         </footer>
 
-        <script src="../js/bootstrap.bundle.js"></script>
+        <script src="../js/bootstrap.bundle.js"></script>+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js" integrity="sha512-UNM1njAgOFUa74Z0bADwAq8gbTcqZC8Ej4xPSzpnh0l6KMevwvkBvbldF9uR++qKeJ+MOZHRjV1HZjoRvjDfNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script type="module" src="../js/cargarEntrenamiento.js"></script>
     </body>
 </html>
