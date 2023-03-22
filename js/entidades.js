@@ -1,3 +1,5 @@
+import { DateTime } from './librerias/luxon.js'; // LIBRERIA LUXON - https://moment.github.io/luxon/#/
+
 export class Ejercicio {
     constructor(id, nombre, hasDistancia, urlImagen) {
         this.id = id;
@@ -51,6 +53,7 @@ export class TarjetaEntrenamiento {
 
     static imprimirFechaCorta(fecha) {
         var meses = [undefined, 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-        return `${meses[parseInt(fecha.substring(5, 7))]} ${fecha.substring(fecha.length-2)}`
+        return `${meses[parseInt(fecha.substring(5, 7))]} ${fecha.substring(8, 10)}`
+
     }
 }

@@ -1,5 +1,6 @@
 import { TarjetaEntrenamiento } from "./entidades.js";
 import { cargaInicialLocalStorage, ejerciciosGuardados, tarjetasEntrenamientoGuardadas } from "./util.js";
+import { DateTime } from './librerias/luxon.js'; // LIBRERIA LUXON - https://moment.github.io/luxon/#/
 import { v4 as generarId } from 'https://jspm.dev/uuid';
 // const generarId = uuid.v4(); // LIBRERIA UUID - https://cdnjs.com/libraries/uuid/8.3.2
 
@@ -39,17 +40,17 @@ const precargaDatosAModificar = async () => {
     if (tarjeta != null) {
         document.querySelector("[data-id]").value = tarjeta.mostrarDato("id");
         document.querySelector("[data-tipo]").value = tarjeta.idEjercicio.id;
-        document.querySelector("[data-fecha]").value = tarjeta.fecha;
+        //document.querySelector("[data-fecha]").value = tarjeta.fecha;  // VERSION SIN LIBRERIA LUXON
+        document.querySelector("[data-fecha]").value = DateTime.fromISO(tarjeta.fecha).toFormat("yyyy-MM-dd"); 
         document.querySelector("[data-duracion]").value = tarjeta.mostrarDato("duracion");
         document.querySelector("[data-calorias]").value = tarjeta.mostrarDato("calorias");
         document.querySelector("[data-cardio]").value = tarjeta.mostrarDato("frecuenciaCardiacaPromedio");
         document.querySelector("[data-distancia]").value = tarjeta.mostrarDato("distancia");
         precargaBanner();
     }
-    // document.querySelector("[data-fecha]").addEventListener('change', (event) => controlarError(event, "fecha", `Debe ingresar una fecha con el formato del ejemplo`));
     document.querySelector("[data-duracion]").addEventListener('change', (event) => controlarError(event, "duracion", `Debe ingresar la información completa`));
-    document.querySelector("[data-distancia]").addEventListener('input', (event) => controlarError(event, "distancia", `Debe ingresar un valor numérico`));
     document.querySelector("[data-duracion]").onkeydown = autocompletarDosPuntos;
+    document.querySelector("[data-distancia]").addEventListener('input', (event) => controlarError(event, "distancia", `Debe ingresar un valor numérico`));
 }
 
 const autocompletarDosPuntos = (event) => {
@@ -98,11 +99,12 @@ const escribirError = (codigo, texto) => {
     document.querySelector(`[data-${codigo}]`).parentNode.insertBefore(p, document.querySelector(`[data-${codigo}]`).nextSibling);
 }
 
-const enviarFormulario = (event) => {
+const enviarFormulario = async (event) => {
     event.preventDefault();
     let id = document.querySelector("[data-id]").value;
     let tipo = ejerciciosGuardados().find(x => x.id == document.querySelector("[data-tipo]").value);
-    let fecha = document.querySelector("[data-fecha]").value; // PENDIENTE AGREGAR LOGICA PARA REPROCESAR STRING A FORMATO DATE
+    //let fecha = document.querySelector("[data-fecha]").value; // VERSION SIN LIBRERIA LUXON
+    let fecha = DateTime.fromFormat(document.querySelector("[data-fecha]").value, 'yyyy-MM-dd');
     let duracion = document.querySelector("[data-duracion]").value.substring(0, 2) * 3600000 + document.querySelector("[data-duracion]").value.substring(3, 5) * 60000 + document.querySelector("[data-duracion]").value.substring(6, 8) * 1000;
     let calorias = parseInt(document.querySelector("[data-calorias]").value, 10);
     let cardio = parseInt(document.querySelector("[data-cardio]").value, 10);
@@ -115,7 +117,7 @@ const enviarFormulario = (event) => {
         localStorage.setItem("listaTarjetas", JSON.stringify(listaTarjetasEntrenamiento));
         window.location.href = `../pages/ver-entrenamiento.html?id=${id}`;
     } else {
-        const nuevaTarjeta = new TarjetaEntrenamiento(generarId, tipo, fecha, duracion, calorias, cardio, distancia);
+        const nuevaTarjeta = new TarjetaEntrenamiento(await generarId(), tipo, fecha, duracion, calorias, cardio, distancia);
         let listaTarjetasEntrenamiento = tarjetasEntrenamientoGuardadas();
         listaTarjetasEntrenamiento.unshift(nuevaTarjeta);
         localStorage.setItem("listaTarjetas", JSON.stringify(listaTarjetasEntrenamiento));

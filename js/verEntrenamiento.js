@@ -1,5 +1,6 @@
 import { cargaInicialLocalStorage, tarjetasEntrenamientoGuardadas } from "./util.js";
-const swal = Swal; //LIBRERIA PROMPTS - https://sweetalert2.github.io/
+import { SweetAlert as swalImport } from './librerias/sweetalert2.js';
+// const swalImport = Swal; //LIBRERIA PROMPTS - https://sweetalert2.github.io/
 // LIBRERIA PROMPTS SIMILAR - https://github.com/apvarun/toastify-js/blob/master/README.md
 
 const cartaInnerHtml = (aux) => {
@@ -44,7 +45,7 @@ const cargaInfo = () => {
     document.querySelector("[data-volver]").addEventListener("click", () => window.location.href = '../pages/entrenamientos.html');
 };
 
-const baseStyle = swal.mixin({
+const baseStyle = swalImport.mixin({
     customClass: {
         confirmButton: 'btn',
         cancelButton: 'btn'
