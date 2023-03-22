@@ -29,14 +29,12 @@ const cartaInnerHtml = (aux) => {
             </div>
         </figcaption>
         `);
-    console.log(string)
     return string;
 }
 
 const cargaInfo = () => {
     const url = new URL(window.location);
     const idParam = url.searchParams.get("id");
-    console.log("idParam", idParam)
     const aux = tarjetasEntrenamientoGuardadas().find(x => x.id == idParam);
     let info = document.querySelector("[data-info]");
     info.innerHTML = cartaInnerHtml(aux);
@@ -55,10 +53,8 @@ const baseStyle = swal.mixin({
 })
 
 const eliminar = (id) => {
-    console.log("idParam", parseInt(id), typeof parseInt(id));
     let listaTarjetas = tarjetasEntrenamientoGuardadas();
     let i = listaTarjetas.findIndex((x) => x.id == id);
-    console.log("i", i)
     listaTarjetas.splice(i, 1);
     localStorage.setItem("listaTarjetas", JSON.stringify(listaTarjetas));
     baseStyle.fire(

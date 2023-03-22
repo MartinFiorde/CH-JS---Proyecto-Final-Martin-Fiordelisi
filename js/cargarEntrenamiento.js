@@ -1,10 +1,9 @@
 import { TarjetaEntrenamiento } from "./entidades.js";
 import { cargaInicialLocalStorage, ejerciciosGuardados, tarjetasEntrenamientoGuardadas } from "./util.js";
-import { DateTime } from "./librerias/luxon.js"; // LIBRERIA LUXON - https://moment.github.io/luxon/
-const generarId = uuid.v4(); // LIBRERIA UUID - https://cdnjs.com/libraries/uuid/8.3.2
+import { v4 as generarId } from 'https://jspm.dev/uuid';
+// const generarId = uuid.v4(); // LIBRERIA UUID - https://cdnjs.com/libraries/uuid/8.3.2
 
 const precargaBanner = () => {
-    console.log("uuidv4",generarId);
     let banner = document.querySelector("[data-banner]");
     let select = document.querySelector("[data-tipo]");
     if (select.value != "") {

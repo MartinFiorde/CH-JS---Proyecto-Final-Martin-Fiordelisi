@@ -51,7 +51,6 @@ export class TarjetaEntrenamiento {
 
     static imprimirFechaCorta(fecha) {
         var meses = [undefined, 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-        console.log(meses[parseInt(fecha.substring(5, 7))])
         return `${meses[parseInt(fecha.substring(5, 7))]} ${fecha.substring(fecha.length-2)}`
     }
 }
