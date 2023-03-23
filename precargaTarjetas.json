@@ -1,0 +1,6 @@
+[
+    { "id": "d370ba91-a01f-482a-bd1c-5fb40322d148", "idEjercicio": { "id": 0, "nombre": "Ciclismo", "hasDistancia": true, "urlImagen": "ciclismo.jpg" }, "fecha": "2023-12-30T00:00:00.000-03:00", "duracion": 2360000, "calorias": 272, "frecuenciaCardiacaPromedio": 187, "distancia": 6.26, "velocidadPromedio": 9.55 },
+    { "id": "1dec0154-fec1-4d6d-b060-c5c04c50faec", "idEjercicio": { "id": 1, "nombre": "Artes marciales", "hasDistancia": false, "urlImagen": "karate.jpg" }, "fecha": "2023-12-23T00:00:00.000-03:00", "duracion": 5400000, "calorias": 414, "frecuenciaCardiacaPromedio": 127, "distancia": null, "velocidadPromedio": null },
+    { "id": "444d7907-e8b6-47c7-b9a4-56fc5f10d269", "idEjercicio": { "id": 2, "nombre": "Elongación", "hasDistancia": false, "urlImagen": "elongar.jpg" }, "fecha": "2023-12-15T00:00:00.000-03:00", "duracion": 4230000, "calorias": 398, "frecuenciaCardiacaPromedio": 112, "distancia": null, "velocidadPromedio": null },
+    { "id": "1fc0bd84-bd3b-4b0c-80dc-821ff877c39b", "idEjercicio": { "id": 3, "nombre": "Running", "hasDistancia": true, "urlImagen": "correr.jpg" }, "fecha": "2023-11-28T00:00:00.000-03:00", "duracion": 7200000, "calorias": 398, "frecuenciaCardiacaPromedio": 115, "distancia": 13.62, "velocidadPromedio": 6.81 }
+]

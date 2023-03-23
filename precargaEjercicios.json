@@ -1,0 +1,6 @@
+[
+    { "id": 0, "nombre": "Ciclismo", "hasDistancia": true, "urlImagen": "ciclismo.jpg" },
+    { "id": 1, "nombre": "Artes marciales", "hasDistancia": false, "urlImagen": "karate.jpg" },
+    { "id": 2, "nombre": "Elongación", "hasDistancia": false, "urlImagen": "elongar.jpg" },
+    { "id": 3, "nombre": "Running", "hasDistancia": true, "urlImagen": "correr.jpg" }
+]

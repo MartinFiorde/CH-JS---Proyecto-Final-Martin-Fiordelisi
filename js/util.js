@@ -35,17 +35,23 @@ const consultaPrecargaTarjetas = () => {
     });
 }
 
-const respuestaPrecargaTarjetas = (option) => {
+const respuestaPrecargaTarjetas = async (option) => {
     if (option) {
+        const archivoTarjetas = await fetch("../precargaTarjetas.json");
+        const data = await archivoTarjetas.json();
+        localStorage.setItem("listaTarjetas", JSON.stringify(data));
+        location.reload();
+        /*
+        // VERSION PREVIA AL USO DE ASYNC/ AWAIT Y ARCHIVOS .JSON
         let listaEjercicios = ejerciciosGuardados();
         let listaTarjetasEntrenamiento = [
-            /*
-            // VERSION SIN LIBRERIA LUXON
-            new TarjetaEntrenamiento("d370ba91-a01f-482a-bd1c-5fb40322d148", listaEjercicios[0], "2023-12-30", (0 * 3600000 + 39 * 60000 + 20 * 1000), 272, 187, 6.26),
-            new TarjetaEntrenamiento("1dec0154-fec1-4d6d-b060-c5c04c50faec", listaEjercicios[1], "2023-12-23", (1 * 3600000 + 30 * 60000 + 0 * 1000), 414, 127, null),
-            new TarjetaEntrenamiento("444d7907-e8b6-47c7-b9a4-56fc5f10d269", listaEjercicios[2], "2023-12-15", (1 * 3600000 + 10 * 60000 + 30 * 1000), 398, 112, null),
-            new TarjetaEntrenamiento("1fc0bd84-bd3b-4b0c-80dc-821ff877c39b", listaEjercicios[3], "2023-11-28", (2 * 3600000 + 0 * 60000 + 0 * 1000), 398, 115, 13.62),
-            */
+            
+            // VERSION SIN LIBRERIA LUXON (adecuar en las demas clases codigo marcado con el mismo comentario)
+            // new TarjetaEntrenamiento("d370ba91-a01f-482a-bd1c-5fb40322d148", listaEjercicios[0], "2023-12-30", (0 * 3600000 + 39 * 60000 + 20 * 1000), 272, 187, 6.26),
+            // new TarjetaEntrenamiento("1dec0154-fec1-4d6d-b060-c5c04c50faec", listaEjercicios[1], "2023-12-23", (1 * 3600000 + 30 * 60000 + 0 * 1000), 414, 127, null),
+            // new TarjetaEntrenamiento("444d7907-e8b6-47c7-b9a4-56fc5f10d269", listaEjercicios[2], "2023-12-15", (1 * 3600000 + 10 * 60000 + 30 * 1000), 398, 112, null),
+            // new TarjetaEntrenamiento("1fc0bd84-bd3b-4b0c-80dc-821ff877c39b", listaEjercicios[3], "2023-11-28", (2 * 3600000 + 0 * 60000 + 0 * 1000), 398, 115, 13.62),
+            
             new TarjetaEntrenamiento("d370ba91-a01f-482a-bd1c-5fb40322d148", listaEjercicios[0], DateTime.fromFormat('2023-12-30', "yyyy-MM-dd").toISO(), (0 * 3600000 + 39 * 60000 + 20 * 1000), 272, 187, 6.26),
             new TarjetaEntrenamiento("1dec0154-fec1-4d6d-b060-c5c04c50faec", listaEjercicios[1], DateTime.fromFormat('2023-12-23', "yyyy-MM-dd").toISO(), (1 * 3600000 + 30 * 60000 + 0 * 1000), 414, 127, null),
             new TarjetaEntrenamiento("444d7907-e8b6-47c7-b9a4-56fc5f10d269", listaEjercicios[2], DateTime.fromFormat('2023-12-15', "yyyy-MM-dd").toISO(), (1 * 3600000 + 10 * 60000 + 30 * 1000), 398, 112, null),
@@ -53,13 +59,19 @@ const respuestaPrecargaTarjetas = (option) => {
         ];
         localStorage.setItem("listaTarjetas", JSON.stringify(listaTarjetasEntrenamiento));
         location.reload();
+        */
     } else {
         localStorage.setItem("listaTarjetas", "[]");
     }
 }
 
-export const cargaInicialLocalStorage = () => {
+export const cargaInicialLocalStorage = async () => {
     if (localStorage.getItem("listaEjercicios") == null || localStorage.getItem("listaEjercicios") == "[]") {
+        const archivoTarjetas = await fetch("../precargaEjercicios.json");
+        const data = await archivoTarjetas.json();
+        localStorage.setItem("listaEjercicios", JSON.stringify(data));
+        /*
+        // VERSION PREVIA AL USO DE ASYNC/ AWAIT Y ARCHIVOS .JSON
         let listaEjercicios = [
             new Ejercicio(0, "Ciclismo", true, "ciclismo.jpg"),
             new Ejercicio(1, "Artes marciales", false, "karate.jpg"),
@@ -67,10 +79,16 @@ export const cargaInicialLocalStorage = () => {
             new Ejercicio(3, "Running", true, "correr.jpg"),
         ];
         localStorage.setItem("listaEjercicios", JSON.stringify(listaEjercicios));
+        */
     }
     if (localStorage.getItem("listaTarjetas") == null || localStorage.getItem("listaTarjetas") == "[]") {
         consultaPrecargaTarjetas();
     }
+
+    const archivoTarjetas = await fetch("../precargaEjercicios.json");
+    const data = await archivoTarjetas.text();
+    console.log(data)
+
 }
 
 export const ejerciciosGuardados = () => {
