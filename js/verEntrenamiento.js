@@ -7,13 +7,18 @@ import { SweetAlert as swalImport } from './librerias/sweetalert2.js';
 const cargaInfo = () => {
     const url = new URL(window.location);
     const idParam = url.searchParams.get("id");
-    const aux = tarjetasEntrenamientoGuardadas().find(x => x.id == idParam);
-    let info = document.querySelector("[data-info]");
-    info.innerHTML = verInnerHtml(aux);
-    document.querySelector("[data-banner]").src = `../img/entrenamientos/${aux.idEjercicio.urlImagen}`;
-    document.querySelector("[data-modificar]").addEventListener("click", () => window.location.href = `../pages/cargar-entrenamiento.html?id=${idParam}`);
-    document.querySelector("[data-eliminar]").addEventListener("click", function () { confirmarBorrado(idParam) });
-    document.querySelector("[data-volver]").addEventListener("click", () => window.location.href = '../pages/entrenamientos.html');
+    try {
+        const aux = tarjetasEntrenamientoGuardadas().find(x => x.id == idParam);
+        let info = document.querySelector("[data-info]");
+        info.innerHTML = verInnerHtml(aux);
+        document.querySelector("[data-banner]").src = `../img/entrenamientos/${aux.idEjercicio.urlImagen}`;
+        document.querySelector("[data-modificar]").addEventListener("click", () => window.location.href = `../pages/cargar-entrenamiento.html?id=${idParam}`);
+        document.querySelector("[data-eliminar]").addEventListener("click", function () { confirmarBorrado(idParam) });
+        document.querySelector("[data-volver]").addEventListener("click", () => window.location.href = '../pages/entrenamientos.html');
+    } catch (error) {
+        console.log(error);
+        window.location.href = '../404.html'
+    }
 };
 
 const baseStyle = swalImport.mixin({

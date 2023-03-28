@@ -87,8 +87,6 @@ export const cargaInicialLocalStorage = async () => {
 
     const archivoTarjetas = await fetch("../precargaEjercicios.json");
     const data = await archivoTarjetas.text();
-    console.log(data)
-
 }
 
 export const ejerciciosGuardados = () => {
