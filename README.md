@@ -12,6 +12,7 @@ Para este proyecto se utilizó JavaScript como principal lenguaje de programaci�
 * Fetch API, 
 * Web Storage API, o la 
 * interfaz Document (DOM).
+
 Adicionalmente se utilizaron librerías como 
 * SweetAlert2 para la generación de "popup boxes", 
 * Uuid para la generación de IDs únicos, y 
