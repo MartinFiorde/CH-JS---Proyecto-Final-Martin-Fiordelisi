@@ -141,7 +141,7 @@ const mainFormulario = () => {
     document.querySelector("[data-form]").addEventListener("submit", enviarFormulario);
 }
 
-cargaInicialLocalStorage();
+// cargaInicialLocalStorage();
 precargaSelect();
 precargaDatosAModificar();
 mainFormulario();

@@ -80,6 +80,8 @@ export const cargaInicialLocalStorage = async () => {
         ];
         localStorage.setItem("listaEjercicios", JSON.stringify(listaEjercicios));
         */
+        window.location.href = '../pages/entrenamientos.html?asd=2';
+        return null;
     }
     if (localStorage.getItem("listaTarjetas") == null || localStorage.getItem("listaTarjetas") == "[]") {
         consultaPrecargaTarjetas();
@@ -103,7 +105,7 @@ export const ejerciciosGuardados = () => {
 export const tarjetasEntrenamientoGuardadas = () => {
     let json = JSON.parse(localStorage.getItem("listaTarjetas"));
     let listaObj = [];
-    for (let i = 0; i < json.length; i++) {
+    for (let i = 0; i < json?.length || 0; i++) {
         let aux = Object.assign(new TarjetaEntrenamiento, json[i]);
         aux.idEjercicio = Object.assign(new Ejercicio, aux.idEjercicio);
         listaObj.push(aux);
